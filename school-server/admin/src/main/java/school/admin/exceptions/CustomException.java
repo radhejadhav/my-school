@@ -1,0 +1,9 @@
+package school.admin.exceptions;
+
+public class CustomException  extends Exception{
+
+    public CustomException(String message) {
+        super(message);
+    }
+
+}

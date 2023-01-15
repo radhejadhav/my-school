@@ -1,6 +1,10 @@
 package school.admin.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -8,10 +12,11 @@ public class SystemUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long ID;
+    private Long id;
     @Column(name = "email")
     private String username;
     @Column(name = "password")
+    @JsonIgnore
     private String password;
     @Column(name = "is_account_non_expired")
     private boolean isAccountNonExpired;
@@ -19,17 +24,46 @@ public class SystemUser {
     private boolean isAccountNonLocked;
     @Column(name = "is_enabled")
     private boolean isEnabled;
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_details_map",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "details_id", referencedColumnName = "id")
+    )
+    private SystemUserDetails userDetails;
 
     public SystemUser() {
+    }
+
+    public SystemUser(SystemUserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
+
+    public SystemUser(String username, String Password) {
+        this.username = username;
+        this.password = Password;
         this.isAccountNonExpired = true;
         this.isAccountNonLocked = true;
         this.isEnabled = true;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public SystemUserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(SystemUserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
+
+    public void setID(Long id) {
+        this.id = id;
     }
 
     public void setUsername(String username) {
@@ -52,12 +86,12 @@ public class SystemUser {
         isEnabled = enabled;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    public Long getID() {
-        return ID;
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -80,14 +114,14 @@ public class SystemUser {
         return isEnabled;
     }
 
-    public Set<String> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
     @Override
     public String toString() {
         return "SystemUser{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", isAccountNonExpired=" + isAccountNonExpired +
