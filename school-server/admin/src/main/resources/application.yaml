@@ -12,12 +12,13 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: update
-#      naming:
-#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        format-sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
 # App Properties
 jwt:

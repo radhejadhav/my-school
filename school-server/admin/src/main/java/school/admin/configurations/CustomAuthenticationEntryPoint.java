@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.ContentCachingResponseWrapper;
 import school.admin.dto.ResponseHandler;
 import school.admin.exceptions.CustomError;
 
@@ -22,10 +23,15 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         CustomError error = new CustomError(authException.getMessage(), HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.toString(),"error");
         ObjectMapper mapper = new ObjectMapper();
-        response
-                .getOutputStream()
-                .println(mapper
-                        .writeValueAsString(ResponseHandler
-                                .generateResponse(authException.getMessage(),HttpStatus.UNAUTHORIZED.toString(), HttpStatus.UNAUTHORIZED, null)));
+        ContentCachingResponseWrapper responseCacheWrapperObject = new ContentCachingResponseWrapper(response);
+        responseCacheWrapperObject.copyBodyToResponse();
+        responseCacheWrapperObject.getResponse().getWriter().write(
+                mapper.writeValueAsString(ResponseHandler.generateResponse(
+                        authException.getMessage(),
+                        HttpStatus.UNAUTHORIZED.toString(),
+                        HttpStatus.UNAUTHORIZED,
+                        null))
+        );
+        responseCacheWrapperObject.getContentAsByteArray();
     }
 }

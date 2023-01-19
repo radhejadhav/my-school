@@ -48,7 +48,7 @@ public class TokenController {
     JwtUtils jwtUtils;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@RequestBody TokenRequest loginRequest) {
+    public ResponseEntity<Object> authenticateUser(@RequestBody TokenRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -61,10 +61,15 @@ public class TokenController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new TokenResponse(jwt,
+        return ResponseHandler.generateResponse(
+                "user login successfull",
+                "Success",
+                HttpStatus.OK,
+                new TokenResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
-                roles));
+                roles)
+        );
     }
 
     @PostMapping("/signup")
@@ -109,9 +114,13 @@ public class TokenController {
         }
         user.setRoles(roles);
         userRepository.save(user);
-
         return ResponseHandler
-                .generateResponse("User created successfully !", HttpStatus.CREATED.toString(),HttpStatus.CREATED, user );
+                .generateResponse(
+                        "User created successfully !",
+                        "Success",
+                        HttpStatus.CREATED,
+                        user
+                );
     }
 
 }
