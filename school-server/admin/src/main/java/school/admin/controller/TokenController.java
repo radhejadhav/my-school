@@ -66,7 +66,8 @@ public class TokenController {
                 "Success",
                 HttpStatus.OK,
                 new TokenResponse(jwt,
-                userDetails.getId(),
+//                userDetails.getId(),
+                        0,
                 userDetails.getUsername(),
                 roles)
         );

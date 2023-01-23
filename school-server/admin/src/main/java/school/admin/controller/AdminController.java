@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.*;
 import school.admin.dto.ResponseHandler;
 import school.admin.entities.SystemUser;
@@ -11,6 +12,7 @@ import school.admin.services.UserService;
 
 @RestController
 @RequestMapping("/users")
+@EnableTransactionManagement
 public class AdminController {
 
     @Autowired

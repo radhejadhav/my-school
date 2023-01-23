@@ -3,6 +3,7 @@ package school.admin.servicesImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,6 @@ public class UserServiceImpl implements UserService {
 
         Optional<SystemUser> optional = repository.findById(id);
 
-        System.out.println(optional.get());
         optional.ifPresent(pUser -> {
             try {
             if(user.getFirstName()!=null){
@@ -59,7 +59,13 @@ public class UserServiceImpl implements UserService {
                 pUser.setLastName((user.getLastName()));
             }
             if (user.getAddress()!=null){
-                pUser.setAddress(user.getAddress());
+                Optional<Address> address = Optional.ofNullable(pUser.getAddress());
+                address.ifPresentOrElse(a->{
+                    pUser.getAddress().setCity(user.getAddress().getCity());
+                    pUser.getAddress().setPinCode(user.getAddress().getPinCode());
+                    pUser.getAddress().setState(user.getAddress().getState());
+                },()-> pUser.setAddress(user.getAddress()));
+
             }
             if(user.getDepartment()!=null){
                 Set<Department> departments = new HashSet<>();

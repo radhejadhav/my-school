@@ -15,15 +15,15 @@ import school.admin.servicesImpl.UserDetailsImpl;
 import java.util.Date;
 
 @Component
-@PropertySource("application.yaml")
-@ConfigurationProperties(prefix = "jwt.keys")
+//@PropertySource("application-${profile}.yaml")
+//@ConfigurationProperties(prefix = "jwt.keys")
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    @Value("${jwtSecret}")
+    @Value("${jwt.keys.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${jwtExpirationMs}")
+    @Value("${jwt.keys.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {

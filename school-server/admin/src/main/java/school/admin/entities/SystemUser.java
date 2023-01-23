@@ -12,8 +12,8 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-//@DynamicInsert
 @DynamicUpdate
+@NoArgsConstructor
 public class SystemUser {
 
     @Id
@@ -41,7 +41,7 @@ public class SystemUser {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.ALL, CascadeType.MERGE})
     @JoinColumn(name = "address_id", referencedColumnName = "id", updatable = true, insertable = true)
     private Address address;
 
@@ -53,15 +53,12 @@ public class SystemUser {
     )
     private Set<Department> department;
 
-    public SystemUser() {
-        this.isAccountNonExpired = true;
-        this.isAccountNonLocked = true;
-        this.isEnabled = true;
-    }
-
     public SystemUser(String username, String password) {
         this.username = username;
         this.password = password;
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isEnabled = true;
     }
 
     @Override

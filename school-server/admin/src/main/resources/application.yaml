@@ -3,25 +3,5 @@ server:
 spring:
   application:
     name: My-Services
-  datasource:
-    url: jdbc:mysql://localhost:3306/admin
-#    driverClassName: com.mysql.jdbc.Driver
-    username: root
-    password: root
-  jpa:
-    generate-ddl: true
-    show-sql: true
-    hibernate:
-      ddl-auto: create
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      hibernate:
-        format-sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
-
-# App Properties
-jwt:
-  keys:
-    jwtSecret: bezKoderSecretKeyadadasdaascascascascascascascdascascascacascascasc
-    jwtExpirationMs: 86400000
+  profiles:
+    active: dev

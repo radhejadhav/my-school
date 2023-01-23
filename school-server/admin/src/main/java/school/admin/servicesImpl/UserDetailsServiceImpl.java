@@ -1,6 +1,7 @@
 package school.admin.servicesImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +11,7 @@ import school.admin.dao.UserRepository;
 import school.admin.entities.SystemUser;
 
 @Service
+@Primary
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -23,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
-        userDetails = UserDetailsImpl.build(user);
+        userDetails = new UserDetailsImpl(user);
         return userDetails;
     }
 }
