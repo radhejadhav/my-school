@@ -2,8 +2,6 @@ package school.admin.servicesImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,22 +23,25 @@ public class UserServiceImpl implements UserService {
 
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
 
-    @Autowired
-    private AddressRepository addressRepository;
+    private final DeptRepository deptRepository;
 
-    @Autowired
-    private DeptRepository deptRepository;
+    public UserServiceImpl(UserRepository repository, AddressRepository addressRepository, DeptRepository deptRepository) {
+        this.repository = repository;
+        this.deptRepository = deptRepository;
+    }
 
     @Override
     public List<SystemUser> getAllUser() {
-        return repository.findAll();
+        List<SystemUser> users = repository.findAll();
+        logger.info(users.toString());
+        return users;
     }
 
     @Override
     public SystemUser createUser(SystemUser user) {
+        logger.info(String.valueOf(user));
         return repository.save(user);
     }
 

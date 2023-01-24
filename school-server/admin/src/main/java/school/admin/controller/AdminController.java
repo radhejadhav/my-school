@@ -15,8 +15,12 @@ import school.admin.services.UserService;
 @EnableTransactionManagement
 public class AdminController {
 
-    @Autowired
-    private UserService adminService;
+    private final UserService adminService;
+
+    public AdminController(UserService adminService) {
+        this.adminService = adminService;
+    }
+
 
     @GetMapping("/find-all")
     public ResponseEntity<Object> allUsers() {

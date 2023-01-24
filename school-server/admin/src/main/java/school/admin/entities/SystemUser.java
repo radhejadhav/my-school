@@ -61,6 +61,10 @@ public class SystemUser {
         this.isEnabled = true;
     }
 
+    public static SystemUserBuilder getSystemUserBuilder(){
+        return new SystemUserBuilder(new SystemUser());
+    }
+
     @Override
     public String toString() {
         return "SystemUser{" +

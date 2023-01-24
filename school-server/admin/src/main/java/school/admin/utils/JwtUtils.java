@@ -15,8 +15,6 @@ import school.admin.servicesImpl.UserDetailsImpl;
 import java.util.Date;
 
 @Component
-//@PropertySource("application-${profile}.yaml")
-//@ConfigurationProperties(prefix = "jwt.keys")
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
