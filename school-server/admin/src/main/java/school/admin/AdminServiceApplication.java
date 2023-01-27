@@ -18,11 +18,7 @@ import java.util.Set;
 
 @SpringBootApplication
 public class AdminServiceApplication {
-
 	public static void main(String[] args) {
-//		new SpringApplicationBuilder(AdminServiceApplication.class)
-//				.profiles("dev").run(args);
 		SpringApplication.run(AdminServiceApplication.class, args);
 	}
-
 }
