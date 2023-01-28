@@ -1,13 +1,13 @@
-package school.admin;
+package com.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AdminServiceApplication {
+public class ConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdminServiceApplication.class, args);
+		SpringApplication.run(ConfigServerApplication.class, args);
 	}
 
 }
