@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ec7d50b-1cee-4c3e-8857-220a23d9282c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/Department.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/FullName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/SeqGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/SystemUserDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/school/admin/configurations/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/configurations/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/SystemUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/school/admin/entities/SystemUser.java" afterDir="false" />
-    </list>
+    <list default="true" id="7ec7d50b-1cee-4c3e-8857-220a23d9282c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,5 +33,16 @@
       <updated>1672557858426</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
