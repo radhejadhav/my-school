@@ -21,3 +21,5 @@ jwt:
   keys:
     jwtSecret: bezKoderSecretKeyadadasdaascascascascascascascdascascascacascascasc
     jwtExpirationMs: 86400000
+    
+abc: xyz
