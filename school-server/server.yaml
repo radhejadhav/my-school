@@ -22,4 +22,5 @@ jwt:
     jwtSecret: bezKoderSecretKeyadadasdaascascascascascascascdascascascacascascasc
     jwtExpirationMs: 86400000
     
-abc: xyz
+abc:
+  xyz: Ridisha
